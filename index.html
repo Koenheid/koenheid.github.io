@@ -47,15 +47,17 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Exo+2&display=swap">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-<style>
+<style>                  
     /* Sets the height of the body and html to 100% of the viewport height */
     body, html {
         height: 100%;
         margin: 0; /* Removes default margin */
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; /* Sets the default font for the page */
+        background-color: #333;
+        font-family: 'Bungee Spice', sans-serif; /* Sets the default font for the page */
     }
 
     /* Styles for the main container */
@@ -72,11 +74,13 @@
     .input-group {
         margin-bottom: 10px; /* Adds space below this section */
 		align-items: center; /* Centers the inline elements vertically */
+        margin-left: auto; /* These two margins */
+		margin-right: auto; /* Center the block horizontally */
     }
 
     /* Styles for input elements within the input group */
     .input-group input {
-        padding: 10px; /* Adds padding inside the input */
+        padding: 7px; /* Adds padding inside the input */
         font-size: 16px; /* Sets the text size in the input */
         margin-right: 10px; /* Adds space to the right of the input */
 		text-align: center; /* Centers the text inside the input */
@@ -85,7 +89,7 @@
     /* Styles for buttons within the input group */
     .input-group button {
         padding: 10px 20px; /* Adds padding inside the button */
-        font-size: 16px; /* Sets the text size in the button */
+        font-size: 14px; /* Sets the text size in the button */
         cursor: pointer; /* Changes cursor to a pointer on hover */
     }
 
@@ -97,19 +101,20 @@
 
     /* Styles for individual record items */
     .record-item {
-        background-color: #f2f2f2; /* Sets the background color of a record item */
-        padding: 10px; /* Adds padding inside a record item */
-        margin-bottom: 5px; /* Adds space below a record item */
-        border-radius: 5px; /* Rounds the corners of a record item */
+        background-color: #756161; /* Sets the background color of a record item */
+        padding: 7px; /* Adds padding inside a record item */
+        margin-bottom: 7px; /* Adds space below a record item */
+        border-radius: 7px; /* Rounds the corners of a record item */
+        font-family: 'Exo 2', sans-serif; /* Sets the font */ 
     }
 
     /* Styles for the main title */
     .title {
-        font-size: 34px; /* Sets the text size for the title */
+        font-size: 42px; /* Sets the text size for the title */
         color: #333; /* Sets the text color for the title */
         text-align: center; /* Centers the title text */
         width: 100%; /* Sets the title width to fill the container */
-        margin-top: 20px; /* Adds space above the title */
+        margin-top: 21px; /* Adds space above the title */
     }
 
     /* Styles for the subtitle */
@@ -123,7 +128,7 @@
     /* Common styles for clear and export buttons */
     .clear-button, .export-button {
         position: fixed; /* Positions the button relative to the viewport */
-        padding: 10px 20px; /* Adds padding inside the button */
+        padding: 7px 7px; /* Adds padding inside the button */
         font-size: flex; /* Sets the font size to adjust based on parent */
         cursor: pointer; /* Changes cursor to a pointer on hover */
         background-color: #4CAF50; /* Sets the background color of the button */
@@ -149,17 +154,17 @@
     .footer-text {
         position: fixed; /* Positions the footer relative to the viewport */
         bottom: 0; /* Positions the footer at the bottom of the viewport */
-        background-color: #4263f5; /* Sets the background color of the footer */
+        background-color: #3e55be9d; /* Sets the background color of the footer */
         width: 100%; /* Sets the footer width to fill the container */
         text-align: center; /* Centers the footer */
 
 	}	
 		
 	#timerDisplay {
-		font-family: 'Arial', sans-serif; /* Sets the font */
-		color: #333333fb; /* Sets the text color */
+		font-family: 'Exo 2', sans-serif; /* Sets the font */
+		color: #1d1d1dfb; /* Sets the text color */
 		background-color: #fcba03; /* Sets the background color */
-		border: 1px solid #f5abab; /* Sets the border */
+		border: 3px solid #430099; /* Sets the border */
 		padding: 2px; /* Sets the padding around the text */
 		margin-top: 5px; /* Adds space above the timer */
 		width: 300px; /* Sets the width of the timer display */
@@ -175,18 +180,21 @@
 <body>
     <div class="container">
         <div class="title">🐄De LoeiLogger📓</div>
-		<div class="subtitle">Voorkom Abuizen Met Buizen🧪</div>
+		<div class="subtitle">⚗️Voorkom Abuizen Met Buizen🧪</div>
         <div class="input-group">
-            <input type="number" id="mlInput" placeholder="Hoeveel mL? 💧" />
-            <button onclick="saveAmount()">Tikken!🥳</button></div>
-		<div id="timerDisplay">Klap eerst een buis om de timer te beginnen!</div>	
+            <input type="number" id="mlInput" placeholder="Hoeveel mL💧? " />
+            <button onclick="saveAmount()">Klappen!👏🥳</button></div>
+		<div id="timerDisplay">Klap je eerste buis om de timer te beginnen!</div>	
         <div class="records" id="recordsList"></div>
-        <button class="clear-button" onclick="clearData()">🐄LoeiLog📓 Legen</button>
-        <button class="export-button" onclick="exportToCSV()">🐄LoeiLog📓 exporteren</button>
-        <div class="footer-text">🐄LoeiLog📓 by Koenheid👑</div>
+        <div class="button-group">
+            <button class="clear-button" onclick="clearData()">🐄LoeiLog📓 Legen</button>
+            <button class="export-button" onclick="exportToCSV()">🐄LoeiLog📓 Exporteren</button></div>
+        <div class="footer-text">🐄LoeiLogger📓™ by Koenheid👑</div>
     </div>
 
     <script>
+         var timerInterval; // Declare timerInterval variable in the global scope
+
         // Function to load records from localStorage and display them
         function loadRecords() {
             var records = JSON.parse(localStorage.getItem('recordsList')) || [];
@@ -234,6 +242,12 @@
             } else {
             alert('Net als je buis, dit even invullen graag!');
             }
+
+            // Clear any existing timer intervals before setting a new one
+            clearInterval(timerInterval);
+
+            // Update the timer display every second
+            timerInterval = setInterval(updateTimerDisplay, 1000);
         }
 
         // Function to export the data to CSV
@@ -271,55 +285,47 @@
             }
         }
 
-        function resetTimerDisplay() {
-        // Stop the existing timer
-        clearInterval(timer);
-q
-        // Reset the timer display to show zero
-        let timerDisplay = document.getElementById('timerDisplay');
-		timerDisplay.textContent = `Klap eerst een buis om de timer te beginnen!`;
+            function resetTimerDisplay() {
+            // Stop the existing timer
+            clearInterval(timerInterval);
 
-        // Set lastTimestamp to null to indicate no active timer
-        lastTimestamp = null;
+            // Set lastTimestamp to null to indicate no active timer
+            localStorage.removeItem('lastLogEntryTime'); // Ensure this key is removed from localStorage
+
+            // Reset the timer display to show the message
+            document.getElementById('timerDisplay').textContent = `Klap je eerste buis om de timer te beginnen!`;
         }
-		
+            
 		function updateTimerDisplay() {
-		  // Retrieve the last log entry time from localStorage
-		  let lastLogEntryTime = localStorage.getItem('lastLogEntryTime');
-		  if (lastLogEntryTime) {
-			lastLogEntryTime = new Date(lastLogEntryTime);
-		  } else {
-			// If no time is recorded, use the current time
-			lastLogEntryTime = new Date();
-		  }
+    // Retrieve the last log entry time from localStorage
+    let lastLogEntryTime = localStorage.getItem('lastLogEntryTime');
+    if (lastLogEntryTime) {
+        lastLogEntryTime = new Date(lastLogEntryTime);
 
-		  // Calculate the time difference
-		  let now = new Date();
-		  let elapsed = now - lastLogEntryTime; // difference in milliseconds
+        // Calculate the time difference
+        let now = new Date();
+        let elapsed = now - lastLogEntryTime; // difference in milliseconds
 
-		  // Convert milliseconds into hours, minutes, and seconds
-		  let seconds = Math.floor(elapsed / 1000);
-		  let minutes = Math.floor(seconds / 60);
-		  seconds = seconds % 60;
-		  let hours = Math.floor(minutes / 60);
-		  minutes = minutes % 60;
+        // Convert milliseconds into hours, minutes, and seconds
+        let seconds = Math.floor(elapsed / 1000);
+        let minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        let hours = Math.floor(minutes / 60);
+        minutes = minutes % 60;
 
-		  // Update the timer display
-		  let timerDisplay = document.getElementById('timerDisplay');
-		  timerDisplay.textContent = `Loeitijd sinds laatste buis: ${hours}h ${minutes}m ${seconds}s`;
-		}
-
-		// Update the timer display every second
-		setInterval(updateTimerDisplay, 1000);
-		
-
-        //What happens when the page loads
+        // Update the timer display with the elapsed time
+        document.getElementById('timerDisplay').textContent = `Loeitijd sinds je laatste buis: ${hours}h ${minutes}m ${seconds}s`;
+    } else {
+        // If no lastLogEntryTime is found, stop the timer and set the default message
+        clearInterval(timerInterval);
+        document.getElementById('timerDisplay').textContent = `Klap je eerste buis om de timer te beginnen!`;
+    }
+}
+        // What happens when the page loads
         window.onload = function() {
-		  loadRecords(); // Call loadRecords on page load to display existing records
-
-		  updateTimerDisplay(); // Initialize the timer display
-		}
-		
+        loadRecords(); // Call loadRecords on page load to display existing records 
+        updateTimerDisplay(); // Initialize the timer display
+    }
     </script>
 </body>
-</html> 
+</html>
