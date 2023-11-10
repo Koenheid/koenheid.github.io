@@ -1,5 +1,309 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>Securitips</title>
-<meta http-equiv="refresh" content="0; URL=https://www.ing.nl/particulier/betaalverzoek/index.html?trxid=JkBzT0M6TALO7Uvu9wg9NPfCz5tBPxUJ">
-<link rel="canonical" href="https://www.ing.nl/particulier/betaalverzoek/index.html?trxid=JkBzT0M6TALO7Uvu9wg9NPfCz5tBPxUJ">
+<html lang="en">
+<head>
+    <script type="text/javascript">
+        window.addEventListener('error', function(event) {
+            var message = JSON.parse(JSON.stringify(event.message));
+            var source = event.filename;
+            var lineno = event.lineno;
+            var colno = event.colno;
+            var error = event.error;
+            
+            window.parent.postMessage({
+                type: 'iframeError',
+                details: {
+                    message: message,
+                    source: source,
+                    lineno: lineno,
+                    colno: colno,
+                    error: error ? error.stack : ''
+                }
+            }, '*');
+        });
+
+        window.addEventListener('unhandledrejection', function(event) {
+            window.parent.postMessage({
+                type: 'iframePromiseRejection',
+                details: {
+                    reason: event.reason
+                }
+            }, '*');
+        });
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐄LoeiLog📓</title>
+<style>
+    /* Sets the height of the body and html to 100% of the viewport height */
+    body, html {
+        height: 100%;
+        margin: 0; /* Removes default margin */
+        font-family: Arial, sans-serif; /* Sets the default font for the page */
+    }
+
+    /* Styles for the main container */
+    .container {
+        min-height: 100%; /* Ensures container is at least viewport height */
+        display: flex; /* Enables flexbox layout */
+        flex-direction: column; /* Stacks children elements vertically */
+        justify-content: top; /* Aligns children to the top of the container */
+        align-items: center; /* Centers children horizontally */
+        padding: 20px; /* Adds padding inside the container */
+    }
+
+    /* Styles for the input group section */
+    .input-group {
+        margin-bottom: 10px; /* Adds space below this section */
+		align-items: center; /* Centers the inline elements vertically */
+    }
+
+    /* Styles for input elements within the input group */
+    .input-group input {
+        padding: 10px; /* Adds padding inside the input */
+        font-size: 16px; /* Sets the text size in the input */
+        margin-right: 10px; /* Adds space to the right of the input */
+		text-align: center; /* Centers the text inside the input */
+    }
+
+    /* Styles for buttons within the input group */
+    .input-group button {
+        padding: 10px 20px; /* Adds padding inside the button */
+        font-size: 16px; /* Sets the text size in the button */
+        cursor: pointer; /* Changes cursor to a pointer on hover */
+    }
+
+    /* Styles for the records section */
+    .records {
+        margin-top: 20px; /* Adds space above the records section */
+        width: 100%; /* Sets the records section width to fill the container */
+    }
+
+    /* Styles for individual record items */
+    .record-item {
+        background-color: #f2f2f2; /* Sets the background color of a record item */
+        padding: 10px; /* Adds padding inside a record item */
+        margin-bottom: 5px; /* Adds space below a record item */
+        border-radius: 5px; /* Rounds the corners of a record item */
+    }
+
+    /* Styles for the main title */
+    .title {
+        font-size: 34px; /* Sets the text size for the title */
+        color: #333; /* Sets the text color for the title */
+        text-align: center; /* Centers the title text */
+        width: 100%; /* Sets the title width to fill the container */
+        margin-top: 20px; /* Adds space above the title */
+    }
+
+    /* Styles for the subtitle */
+    .subtitle {
+        font-size: 21px; /* Sets the text size for the subtitle */
+        color: #333; /* Sets the text color for the subtitle */
+        text-align: center; /* Centers the subtitle text */
+        width: 100%; /* Sets the subtitle width to fill the container */            
+    }
+
+    /* Common styles for clear and export buttons */
+    .clear-button, .export-button {
+        position: fixed; /* Positions the button relative to the viewport */
+        padding: 10px 20px; /* Adds padding inside the button */
+        font-size: flex; /* Sets the font size to adjust based on parent */
+        cursor: pointer; /* Changes cursor to a pointer on hover */
+        background-color: #4CAF50; /* Sets the background color of the button */
+        color: white; /* Sets the text color of the button */
+        border: none; /* Removes the border of the button */
+        border-radius: 5px; /* Rounds the corners of the button */
+    }
+
+    /* Specific styles for the clear button */
+    .clear-button {
+        left: 20px; /* Positions the clear button 20px from the left */
+        bottom: 42px; /* Positions the clear button 42px from the bottom */
+        background-color: #f44336; /* Sets the clear button background color */
+    }
+
+    /* Specific styles for the export button */
+    .export-button {
+        right: 20px; /* Positions the export button 20px from the right */
+        bottom: 42px; /* Positions the export button 42px from the bottom */
+    }
+
+    /* Styles for the footer text */
+    .footer-text {
+        position: fixed; /* Positions the footer relative to the viewport */
+        bottom: 0; /* Positions the footer at the bottom of the viewport */
+        background-color: #4263f5; /* Sets the background color of the footer */
+        width: 100%; /* Sets the footer width to fill the container */
+        text-align: center; /* Centers the footer */
+
+	}	
+		
+	#timerDisplay {
+		font-family: 'Arial', sans-serif; /* Sets the font */
+		color: #333333fb; /* Sets the text color */
+		background-color: #fcba03; /* Sets the background color */
+		border: 1px solid #f5abab; /* Sets the border */
+		padding: 2px; /* Sets the padding around the text */
+		margin-top: 5px; /* Adds space above the timer */
+		width: 300px; /* Sets the width of the timer display */
+		text-align: center; /* Centers the text */
+		border-radius: 5px; /* Rounds the corners of the border */
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds a subtle shadow */
+		display: block; /* Makes the div a block element */
+		margin-left: auto; /* These two margins */
+		margin-right: auto; /* Center the block horizontally */
+	}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">🐄De LoeiLogger📓</div>
+		<div class="subtitle">Voorkom Abuizen Met Buizen🧪</div>
+        <div class="input-group">
+            <input type="number" id="mlInput" placeholder="Hoeveel mL? 💧" />
+            <button onclick="saveAmount()">Tikken!🥳</button></div>
+		<div id="timerDisplay">Klap eerst een buis om de timer te beginnen!</div>	
+        <div class="records" id="recordsList"></div>
+        <button class="clear-button" onclick="clearData()">🐄LoeiLog📓 Legen</button>
+        <button class="export-button" onclick="exportToCSV()">🐄LoeiLog📓 exporteren</button>
+        <div class="footer-text">🐄LoeiLog📓 by Koenheid👑</div>
+    </div>
+
+    <script>
+        // Function to load records from localStorage and display them
+        function loadRecords() {
+            var records = JSON.parse(localStorage.getItem('recordsList')) || [];
+            records.forEach(function(record) {
+                createRecordElement(record.mlAmount, record.timeString, record.dateString);
+            });
+        }
+
+        // Function to create a record element and append it to the list
+        function createRecordElement(mlAmount, timeString, dateString) {
+            var recordItem = document.createElement('div');
+            recordItem.classList.add('record-item');
+            recordItem.textContent = `🧪 ${mlAmount}mL 🕰️  ${timeString} | ${dateString}`;
+            document.getElementById('recordsList').appendChild(recordItem);
+        }
+
+        // Updated saveAmount function to save records to localStorage
+        function saveAmount() {
+            var mlAmount = document.getElementById('mlInput').value;
+            if (mlAmount) {
+            var currentDate = new Date();
+            var day = currentDate.toLocaleString('en-GB', { day: '2-digit' });
+            var month = currentDate.toLocaleString('en-GB', { month: '2-digit' });
+            var year = currentDate.toLocaleString('en-GB', { year: 'numeric' });
+            var hours = currentDate.getHours().toString().padStart(2, '0');
+            var minutes = currentDate.getMinutes().toString().padStart(2, '0');
+            var seconds = currentDate.getSeconds().toString().padStart(2, '0');
+            var weekday = currentDate.toLocaleString('en-GB', { weekday: 'long' });
+
+            var timeString = `${hours}:${minutes}:${seconds}`;
+            var dateString = `${weekday} ${day}/${month}/${year}`;
+
+            // Record the current time as the time of the last log entry.
+            localStorage.setItem('lastLogEntryTime', currentDate.toISOString());
+
+            // Save the record in localStorage
+            var records = JSON.parse(localStorage.getItem('recordsList')) || [];
+            records.push({ mlAmount: mlAmount, timeString: timeString, dateString: dateString });
+            localStorage.setItem('recordsList', JSON.stringify(records));
+
+            // Create and append the new record element
+            createRecordElement(mlAmount, timeString, dateString);
+
+            document.getElementById('mlInput').value = ''; // Clear input
+            } else {
+            alert('Net als je buis, dit even invullen graag!');
+            }
+        }
+
+        // Function to export the data to CSV
+        function exportToCSV() {
+            var records = JSON.parse(localStorage.getItem('recordsList')) || [];
+            var csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Record ID,Amount (mL),Timestamp\r\n"; // Header row
+
+            records.forEach(function(record, index) {
+                var row = (index + 1) + ',' + record.mlAmount + ',' + record.dateString + ' ' + record.timeString;
+                csvContent += row + "\r\n";
+            });
+
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "LoeiLog.csv");
+            document.body.appendChild(link); // Required for FF
+
+            link.click(); // This will download the data file named "LoeiLog.csv".
+        }
+
+        // Function to clear all data
+        function clearData() {
+            if (confirm('Je volledige 🐄LoeiLog📓 wordt gewist, weet je het zeker?')) {
+                // Clear localStorage
+                localStorage.removeItem('recordsList');
+		        localStorage.removeItem('lastLogEntryTime'); // Remove the timestamp of the last log entry
+			
+                // Clear displayed list
+                document.getElementById('recordsList').innerHTML = '';
+		
+		        // Reset the timer display without starting the timer
+				resetTimerDisplay();		
+            }
+        }
+
+        function resetTimerDisplay() {
+        // Stop the existing timer
+        clearInterval(timer);
+q
+        // Reset the timer display to show zero
+        let timerDisplay = document.getElementById('timerDisplay');
+		timerDisplay.textContent = `Klap eerst een buis om de timer te beginnen!`;
+
+        // Set lastTimestamp to null to indicate no active timer
+        lastTimestamp = null;
+        }
+		
+		function updateTimerDisplay() {
+		  // Retrieve the last log entry time from localStorage
+		  let lastLogEntryTime = localStorage.getItem('lastLogEntryTime');
+		  if (lastLogEntryTime) {
+			lastLogEntryTime = new Date(lastLogEntryTime);
+		  } else {
+			// If no time is recorded, use the current time
+			lastLogEntryTime = new Date();
+		  }
+
+		  // Calculate the time difference
+		  let now = new Date();
+		  let elapsed = now - lastLogEntryTime; // difference in milliseconds
+
+		  // Convert milliseconds into hours, minutes, and seconds
+		  let seconds = Math.floor(elapsed / 1000);
+		  let minutes = Math.floor(seconds / 60);
+		  seconds = seconds % 60;
+		  let hours = Math.floor(minutes / 60);
+		  minutes = minutes % 60;
+
+		  // Update the timer display
+		  let timerDisplay = document.getElementById('timerDisplay');
+		  timerDisplay.textContent = `Loeitijd sinds laatste buis: ${hours}h ${minutes}m ${seconds}s`;
+		}
+
+		// Update the timer display every second
+		setInterval(updateTimerDisplay, 1000);
+		
+
+        //What happens when the page loads
+        window.onload = function() {
+		  loadRecords(); // Call loadRecords on page load to display existing records
+
+		  updateTimerDisplay(); // Initialize the timer display
+		}
+		
+    </script>
+</body>
+</html> 
