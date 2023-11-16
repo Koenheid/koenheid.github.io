@@ -112,7 +112,7 @@
 
     /* Styles for the main title */
     .title {
-        font-size: 42px; /* Sets the text size for the title */
+        font-size: 34px; /* Sets the text size for the title */
         color: #333; /* Sets the text color for the title */
         text-align: center; /* Centers the title text */
         width: 100%; /* Sets the title width to fill the container */
@@ -162,7 +162,7 @@
 
 	}	
 		
-	#timerDisplay {
+	#buizentimer {
 		font-family: 'Exo 2', sans-serif; /* Sets the font */
 		color: #1d1d1dfb; /* Sets the text color */
 		background-color: #fcba03; /* Sets the background color */
@@ -186,7 +186,7 @@
         <div class="input-group">
             <input type="number" id="mlInput" placeholder="Hoeveel mL💧? " />
             <button onclick="saveAmount()">Klappen!👏🥳</button></div>
-		<div id="timerDisplay">Klap je eerste buis om de timer te beginnen!</div>	
+		<div id="buizentimer">Klap je eerste buis om de timer te beginnen!</div>	
         <div class="records" id="recordsList"></div>
         <div class="button-group">
             <button class="clear-button" onclick="clearData()">🐄LoeiLog📓 Legen</button>
@@ -249,7 +249,7 @@
             clearInterval(timerInterval);
 
             // Update the timer display every second
-            timerInterval = setInterval(updateTimerDisplay, 1000);
+            timerInterval = setInterval(updatebuizentimer, 1000);
         }
 
         // Function to export the data to CSV
@@ -283,11 +283,11 @@
                 document.getElementById('recordsList').innerHTML = '';
 		
 		        // Reset the timer display without starting the timer
-				resetTimerDisplay();		
+				resetbuizentimer();		
             }
         }
 
-            function resetTimerDisplay() {
+            function resetbuizentimer() {
             // Stop the existing timer
             clearInterval(timerInterval);
 
@@ -295,10 +295,10 @@
             localStorage.removeItem('lastLogEntryTime'); // Ensure this key is removed from localStorage
 
             // Reset the timer display to show the message
-            document.getElementById('timerDisplay').textContent = `Klap je eerste buis om de timer te beginnen!`;
+            document.getElementById('buizentimer').textContent = `Klap je eerste buis om de timer te beginnen!`;
         }
             
-		function updateTimerDisplay() {
+		function updatebuizentimer() {
     // Retrieve the last log entry time from localStorage
     let lastLogEntryTime = localStorage.getItem('lastLogEntryTime');
     if (lastLogEntryTime) {
@@ -316,17 +316,17 @@
         minutes = minutes % 60;
 
         // Update the timer display with the elapsed time
-        document.getElementById('timerDisplay').textContent = `Loeitijd sinds je laatste buis: ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('buizentimer').textContent = `Loeitijd sinds je laatste buis: ${hours}h ${minutes}m ${seconds}s`;
     } else {
         // If no lastLogEntryTime is found, stop the timer and set the default message
         clearInterval(timerInterval);
-        document.getElementById('timerDisplay').textContent = `Klap je eerste buis om de timer te beginnen!`;
+        document.getElementById('buizentimer').textContent = `Klap je eerste buis om de timer te beginnen!`;
     }
 }
         // What happens when the page loads
         window.onload = function() {
         loadRecords(); // Call loadRecords on page load to display existing records 
-        updateTimerDisplay(); // Initialize the timer display
+        updatebuizentimer(); // Initialize the timer display
     }
     </script>
 </body>
